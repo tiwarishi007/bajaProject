@@ -15,7 +15,7 @@ function App() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:9999/bfhl",
+        "http://baja-backend-virid.vercel.app/bfhl",
         {
           data,
         }
