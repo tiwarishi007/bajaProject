@@ -11,25 +11,34 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const submitData = async (data) => {
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const res = await axios.post(
-        "https://baja-backend-virid.vercel.app/bfhl",
-        {
-          data,
-        }
-      );
+    console.log("Sending request...");
 
-      setResponse(res.data);
-    } catch (error) {
-      console.error(error);
+    const res = await axios.post(
+      "https://baja-backend-virid.vercel.app/bfhl",
+      { data },
+      {
+        timeout: 10000,
+      }
+    );
 
-      alert("API Error");
-    } finally {
-      setLoading(false);
+    console.log("Response:", res.data);
+
+    setResponse(res.data);
+  } catch (error) {
+    console.error("FULL ERROR:", error);
+
+    if (error.response) {
+      console.log("Response Error:", error.response.data);
     }
-  };
+
+    alert(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="container">
