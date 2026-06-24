@@ -5,19 +5,16 @@ const bfhlRoutes = require("./routes/bfhl.route");
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use("/bfhl", bfhlRoutes);
-
-// Health Check Route (optional)
 app.get("/", (req, res) => {
-  res.json({
+  res.status(200).json({
     success: true,
     message: "BFHL API is running",
   });
 });
+
+app.use("/bfhl", bfhlRoutes);
 
 module.exports = app;
